@@ -71,5 +71,9 @@ Plug 'Raimondi/delimitMate'
 
 " eunuch
 Plug 'tpope/vim-eunuch'
-
+Plug 'jpo/vim-railscasts-theme'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-cucumber'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'ConradIrwin/vim-bracketed-paste'
 call plug#end()
