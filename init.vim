@@ -1,4 +1,4 @@
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
@@ -196,6 +196,7 @@ let $PATH='/usr/local/bin:' . $PATH
 
 " Sessions
 let g:session_autoload = 'no'
+let g:deoplete#enable_at_startup=1
 
 " Leader Mappings
 map <Space> <leader>
