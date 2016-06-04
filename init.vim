@@ -32,7 +32,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'myusuf3/numbers.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jgdavey/tslime.vim'
-Plug 'henrik/vim-qargs'
+Plug 'nelstrom/vim-qargs'
 Plug 'kchmck/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
@@ -62,7 +62,6 @@ Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'geekjuice/vim-spec'
 Plug 'godlygeek/tabular'
-Plug 'henrik/vim-qargs'
 Plug 'int3/vim-extradite'
 Plug 'itchyny/dictionary.vim'
 Plug 'jelera/vim-javascript-syntax'
@@ -151,7 +150,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Utils
 Plug 'benekastah/neomake'     " plugin for asynchronous :make using (NeoVim)
-Plug 'bling/vim-airline'      " status-bar
 Plug 'tpope/vim-surround'     " for manipulation with quotes :)
 Plug 'tomtom/tcomment_vim'    " commenter
 Plug 'AndrewRadev/switch.vim' " useful switcher
@@ -175,6 +173,18 @@ Plug 'mdelillo/vim-simple-bdd'
 Plug 'tpope/vim-endwise'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'myusuf3/numbers.vim'
+
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
+"Plug 'rhysd/nyaovim-markdown-preview' for markdown preview
 " Plug 'Townk/vim-autoclose'
 " Add plugins to &runtimepath
 call plug#end()
@@ -217,6 +227,11 @@ map <Leader>a :call RunAllSpecs()<CR>
 map <F10> :NERDTreeToggle<CR>
 " Current file in nerdtree
 map <F9> :NERDTreeFind<CR>
+
+" Enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
 
 " Reduce timeout after <ESC> is recvd. This is only a good idea on fast links.
 set ttimeout
@@ -418,6 +433,8 @@ nnoremap <C-l> <C-w>l
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_ruby_checkers = ['mri']
 let g:syntastic_enable_highlighting=0
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {'regex': 'possibly useless use of a variable in void context'}
 
 " Local config
 if filereadable($HOME . "/.nvimrc.local")
